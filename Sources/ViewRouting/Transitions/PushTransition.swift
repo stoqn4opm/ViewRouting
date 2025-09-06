@@ -14,16 +14,22 @@ import UIKit
 
 public final class PushTransition: NSObject {
     public var isAnimated: Bool
+    weak var explicitNavigationController: UINavigationController?
 
     private weak var from: UIViewController?
     private var openCompletionHandler: (() -> Void)?
     private var closeCompletionHandler: (() -> Void)?
-
-    private let navigationController: UINavigationController
-
-    public init(isAnimated: Bool = true, navigationController: UINavigationController) {
+    
+    public init(from navigationController: UINavigationController? = nil, isAnimated: Bool = true) {
         self.isAnimated = isAnimated
-        self.navigationController = navigationController
+        super.init()
+        self.explicitNavigationController = navigationController
+    }
+    
+    private var navigationController: UINavigationController? {
+        self.explicitNavigationController ??
+        from as? UINavigationController ??
+        from?.navigationController
     }
 }
 
@@ -34,13 +40,13 @@ extension PushTransition: Transition {
     public func open(_ viewController: UIViewController, from: UIViewController, completion: (() -> Void)?) {
         self.from = from
         openCompletionHandler = completion
-        navigationController.delegate = self
-        navigationController.pushViewController(viewController, animated: isAnimated)
+        navigationController?.delegate = self
+        navigationController?.pushViewController(viewController, animated: isAnimated)
     }
 
     public func close(_ viewController: UIViewController, completion: (() -> Void)?) {
         closeCompletionHandler = completion
-        navigationController.popViewController(animated: isAnimated)
+        navigationController?.popViewController(animated: isAnimated)
     }
 }
 

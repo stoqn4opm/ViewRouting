@@ -11,6 +11,9 @@ let package = Package(
         .library(
             name: "ViewRouting",
             targets: ["ViewRouting"]),
+        .library(
+            name: "DeeplinkRouting",
+            targets: ["DeeplinkRouting"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -22,6 +25,9 @@ let package = Package(
         .target(
             name: "ViewRouting",
             dependencies: []),
+        .target(
+            name: "DeeplinkRouting",
+            dependencies: ["ViewRouting"]),
         .testTarget(
             name: "ViewRoutingTests",
             dependencies: ["ViewRouting"]),

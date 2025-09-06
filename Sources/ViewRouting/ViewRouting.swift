@@ -27,4 +27,26 @@ public protocol Router: Routable {
     var root: UIViewController? { get set }
 }
 
+// MARK: - Router Type Utilities
+
+/// Protocol providing default `decoratee` forwarding behaviour for router decorators.
+public protocol RouterDecorator: Router {
+    var decoratee: Router { get }
+}
+
+public extension RouterDecorator {
+    var root: UIViewController? {
+        get { decoratee.root }
+        set { decoratee.root = newValue }
+    }
+    
+    func route(to viewController: UIViewController, as transition: Transition) {
+        decoratee.route(to: viewController, as: transition)
+    }
+    
+    func route(to viewController: UIViewController, as transition: Transition, completion: (() -> Void)?) {
+        decoratee.route(to: viewController, as: transition, completion: completion)
+    }
+}
+
 #endif

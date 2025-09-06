@@ -1,5 +1,5 @@
 import XCTest
-@testable import ViewRouting
+@testable 
 
 final class ViewRoutingTests: XCTestCase {
     func testExample() throws {
