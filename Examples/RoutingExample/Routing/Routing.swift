@@ -25,6 +25,7 @@ typealias PushTransition = ViewRouting.PushTransition
 typealias ModalTransition = ViewRouting.ModalTransition
 typealias Routable = ViewRouting.Routable
 typealias RootControllerCrossDissolveTransition = ViewRouting.RootControllerCrossDissolveTransition
+typealias ActiveSceneFirstWindowProvider = ViewRouting.ActiveSceneFirstWindowProvider
 
 
 // MARK: - DeeplinkingRouting Definitions

@@ -39,7 +39,7 @@ extension MainTabBarRoute where Self: Routable {
         let tabBarController = MainTabBarController(allTabs: sortedTabs,
                                                     selection: selection)
         
-        route(to: tabBarController, as: RootControllerCrossDissolveTransition())
+        route(to: tabBarController, as: RootControllerCrossDissolveTransition(windowProvider: ActiveSceneFirstWindowProvider()))
         mainRouter.root = tabBarController
         selection.selectedTab = tab
         return tabBarController
